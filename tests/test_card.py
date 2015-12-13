@@ -85,3 +85,47 @@ class TestCard(unittest.TestCase):
             except InvalidFace:
                 sucess = True
             self.assertTrue(sucess, msg="Invalid face " + face + " created.")
+
+    def test_get_value(self):
+        """A test which checks the get_value method of the Card class."""
+
+        # Test to make sure that all of the faces and values match up
+        faces = [
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "Jack",
+            "Queen",
+            "King",
+            "Ace",
+        ]
+        values = [
+            [2,],
+            [3,],
+            [4,],
+            [5,],
+            [6,],
+            [7,],
+            [8,],
+            [9,],
+            [10,],
+            [10,],
+            [10,],
+            [10,],
+            [1, 11,],
+        ]
+
+        for index in range(len(faces)):
+            face = faces[index]
+            card = Card("Clubs", face)
+            found_value = card.get_value()
+            expected_value = values[index]
+            self.assertEqual(found_value, expected_value, msg="The value for face " + face + \
+                " was incorrectly returned as " + str(found_value[0]) + " when it should have" + \
+                " been " + str(expected_value[0]) + ".")

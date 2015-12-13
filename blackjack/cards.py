@@ -51,6 +51,28 @@ class Card(object):
         self.suit = suit
         self.face = face
 
+    def get_value(self):
+        """
+        The method which returns the possible value(s) of the card.
+
+        The result is returned as a list, as Aces can be counted as either 1 or 11.
+
+        :returns list: The possible value(s) of the card
+        """
+        # Check if the face of the card is numeric
+        try:
+            value = [int(self.face),]
+            return value
+        except ValueError:
+            # Handle if the face of the card is not numeric
+            values = {
+                "Jack": [10,],
+                "Queen": [10,],
+                "King": [10,],
+                "Ace": [1,11,],
+            }
+            return values[self.face]
+
 class InvalidSuit(Exception):
     """
     An exception which is raised when a card with an invalid suit is attempted to be created.
