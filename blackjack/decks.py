@@ -48,7 +48,6 @@ class Deck(object):
             for suit in suits:
                 for face in faces:
                     self.cards.append(Card(suit, face))
-                    print("Cards: " + str(len(self.cards)))
 
     def __len__(self):
         """
