@@ -8,6 +8,7 @@ from .decks import InvalidDeckDraw
 from .people import Person
 from .people import InvalidPersonName
 from .people import InvalidCardAdd
+from .dealers import Dealer
 
 __author__ = 'Christopher Randall Wells'
 __copyright__ = 'Copyright 2015 Christopher Randall Wells'
@@ -20,6 +21,7 @@ __all__ = (
     'Card',
     'Deck',
     'Person',
+    'Dealer',
 
     # Exceptions
     'InvalidSuit',
@@ -27,5 +29,5 @@ __all__ = (
     'InvalidDeckSize',
     'InvalidDeckDraw',
     'InvalidPersonName',
-    'InvalidCard',
+    'InvalidCardAdd',
 )
