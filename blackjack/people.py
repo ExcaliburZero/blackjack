@@ -40,7 +40,7 @@ class Person(object):
         The method used to add a card to the person's cards.
 
         :param Card card: The card to add to the person's cards.
-        :raises IvalidCardAdd: if the given card is invalid.
+        :raises InvalidCardAdd: if the given card is invalid.
         """
 
         # Check to make sure that the card is not invalid
@@ -49,6 +49,53 @@ class Person(object):
 
         # Add the card to the person's cards
         self.cards.append(card)
+
+    def card_values(self):
+        """
+        The method used to get all of the possible values of the total of the values of the person's cards.
+
+        :returns list: The possible values of the total of the values of the user's cards.
+        """
+
+        # Find the number of possible totals
+        totals = 1
+        aces = 0
+        for card in self.cards:
+            if card.face == "Ace":
+                aces += 1
+        totals += aces
+
+        # Find each of the possible totals
+        values = [0] * totals
+        for card in self.cards:
+            if card.face != "Ace":
+                for index in range(len(values)):
+                    values[index] += card.get_value()[0]
+        if aces > 0:
+            for index in range(len(values)):
+                values[index] += 1 * (aces - index) + 11 * index
+
+        # Return the possible totals
+        return values
+
+    def has_blackjack(self):
+        """
+        The method used to tell whether or not the person has blackjack.
+
+        :returns bool: Whether or not the person has blackjack.
+        """
+
+        # Check to make sure that the person does not have more than two cards
+        if len(self.cards) > 2:
+            return False
+
+        # See if the person has a possible card value of 21
+        for value in self.card_values():
+            if value == 21:
+                return True
+
+        # If no possiblity was 21, then the person does not have blackjack
+        return False
 
 
 class InvalidPersonName(Exception):

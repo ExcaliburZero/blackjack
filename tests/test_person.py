@@ -21,6 +21,7 @@ class TestPerson(unittest.TestCase):
         ]
         for name in valid_names:
             person = Person()
+            self.assertEqual(person.name, "", msg="A person initially had the name of " + person.name + ".")
             person.set_name(name)
             self.assertEqual(person.name, name, msg="A person with the valid name " + name + " was unable to be created.")
 
@@ -61,3 +62,133 @@ class TestPerson(unittest.TestCase):
         except InvalidCardAdd:
             success = True
         self.assertTrue(success, msg="A None card was added to the person's cards.")
+
+    def test_card_values(self):
+        """A test which makes sure the card_values method of the Person class functions correctly."""
+
+        # Compare some expected card values with their cards
+        cards_set = [
+            [
+                Card("Clubs", "2"),
+                Card("Clubs", "3"),
+            ],
+            [
+                Card("Clubs", "2"),
+                Card("Clubs", "Jack"),
+            ],
+            [
+                Card("Clubs", "Queen"),
+                Card("Clubs", "King"),
+            ],
+            [
+                Card("Clubs", "2"),
+                Card("Clubs", "Ace"),
+            ],
+            [
+                Card("Clubs", "2"),
+                Card("Clubs", "Ace"),
+                Card("Clubs", "Ace"),
+            ],
+            [
+                Card("Clubs", "2"),
+                Card("Clubs", "Ace"),
+                Card("Clubs", "Ace"),
+                Card("Clubs", "Ace"),
+            ],
+            [
+            ],
+            [
+                Card("Clubs", "Ace"),
+            ],
+        ]
+        values_set = [
+            [5,],
+            [12,],
+            [20,],
+            [3,13,],
+            [4,14,24,],
+            [5,15,25,35,],
+            [0,],
+            [1,11,],
+        ]
+        for index in range(len(cards_set)):
+            person = Person()
+            for card in cards_set[index]:
+                person.add_card(card)
+            expected_values = values_set[index]
+            calculated_values = person.card_values()
+            self.assertEqual(calculated_values, expected_values, msg="A card values test failed at index " + str(index) + ".")
+
+    def test_has_blackjack(self):
+        """A test which makes sure the has_blackjack method of the Person class functions correctly."""
+
+        # Test cases where there is blackjack
+        blackjack_cases = [
+            [
+                Card("Clubs", "10"),
+                Card("Clubs", "Ace"),
+            ],
+            [
+                Card("Clubs", "Jack"),
+                Card("Clubs", "Ace"),
+            ],
+            [
+                Card("Clubs", "Queen"),
+                Card("Clubs", "Ace"),
+            ],
+            [
+                Card("Clubs", "King"),
+                Card("Clubs", "Ace"),
+            ],
+        ]
+        for index in range(len(blackjack_cases)):
+            cards = blackjack_cases[index]
+            person = Person()
+            for card in cards:
+                person.add_card(card)
+            result = person.has_blackjack()
+            self.assertTrue(result, msg="A person that should have had blackjack did not at index " + str(index) + ".")
+
+        # Test cases where there is not blackjack
+        non_blackjack_cases = [
+            [
+                Card("Clubs", "9"),
+                Card("Clubs", "Ace"),
+            ],
+            [
+                Card("Clubs", "10"),
+                Card("Clubs", "10"),
+            ],
+            [
+                Card("Clubs", "10"),
+                Card("Clubs", "5"),
+            ],
+            [
+                Card("Clubs", "Ace"),
+                Card("Clubs", "Ace"),
+            ],
+            [
+                Card("Clubs", "10"),
+                Card("Clubs", "Ace"),
+                Card("Clubs", "Ace"),
+            ],
+            [
+                Card("Clubs", "Ace"),
+                Card("Clubs", "Ace"),
+                Card("Clubs", "Ace"),
+            ],
+            [
+                Card("Clubs", "2"),
+                Card("Clubs", "8"),
+                Card("Clubs", "Ace"),
+            ],
+            [
+            ],
+        ]
+        for index in range(len(non_blackjack_cases)):
+            cards = non_blackjack_cases[index]
+            person = Person()
+            for card in cards:
+                person.add_card(card)
+            result = person.has_blackjack()
+            self.assertFalse(result, msg="A person that should have had blackjack did not at index " + str(index) + ".")
