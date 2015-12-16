@@ -9,6 +9,8 @@ from .people import Person
 from .people import InvalidPersonName
 from .people import InvalidCardAdd
 from .dealers import Dealer
+from .actions import Action
+from .actions import InvalidActionMove
 
 __author__ = 'Christopher Randall Wells'
 __copyright__ = 'Copyright 2015 Christopher Randall Wells'
@@ -22,6 +24,7 @@ __all__ = (
     'Deck',
     'Person',
     'Dealer',
+    'Action',
 
     # Exceptions
     'InvalidSuit',
@@ -30,4 +33,5 @@ __all__ = (
     'InvalidDeckDraw',
     'InvalidPersonName',
     'InvalidCardAdd',
+    'InvalidActionMove',
 )
