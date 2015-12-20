@@ -9,6 +9,9 @@ from .people import Person
 from .people import InvalidPersonName
 from .people import InvalidCardAdd
 from .dealers import Dealer
+from .players import Player
+from .players import InvalidStartingChips
+from .players import InvalidChipsChange
 from .actions import Action
 from .actions import InvalidActionMove
 
@@ -24,6 +27,7 @@ __all__ = (
     'Deck',
     'Person',
     'Dealer',
+    'Player',
     'Action',
 
     # Exceptions
@@ -33,5 +37,7 @@ __all__ = (
     'InvalidDeckDraw',
     'InvalidPersonName',
     'InvalidCardAdd',
+    'InvalidStartingChips',
+    'InvalidChipsChange',
     'InvalidActionMove',
 )
