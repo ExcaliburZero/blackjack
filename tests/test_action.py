@@ -1,4 +1,4 @@
-"""These are tests of the Deck class."""
+"""These are tests of the Action class."""
 import unittest
 
 from blackjack import Action
