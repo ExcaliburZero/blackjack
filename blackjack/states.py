@@ -31,8 +31,8 @@ class State(object):
         # If the name is valid then set it
         self.name = name
 
-        # Check to make sure that the player is valid
-        if not isinstance(player, Player):
+        # Check to make sure that the player is valid, None is valid, as it is possible for a state to have no associated player
+        if not isinstance(player, Player) and player is not None:
             raise InvalidStatePlayer
 
         # If the player is valid then set it

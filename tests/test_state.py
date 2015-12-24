@@ -62,7 +62,6 @@ class TestState(unittest.TestCase):
             Dealer(),
             "Player 1",
             1,
-            None,
         ]
         for index in range(len(invalid_players)):
             success = False
