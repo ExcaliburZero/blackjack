@@ -19,6 +19,7 @@ class State(object):
 
         # Check to make sure that the name is valid
         valid_names = [
+            "get_number_of_packs",
             "get_number_of_players",
             "get_player_chips",
             "get_player_names",
