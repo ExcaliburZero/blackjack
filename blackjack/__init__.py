@@ -17,6 +17,7 @@ from .actions import InvalidActionMove
 from .states import State
 from .states import InvalidStateName
 from .states import InvalidStatePlayer
+from .games import Game
 
 __author__ = 'Christopher Randall Wells'
 __copyright__ = 'Copyright 2015 Christopher Randall Wells'
@@ -33,6 +34,7 @@ __all__ = (
     'Player',
     'Action',
     'State',
+    'Game',
 
     # Exceptions
     'InvalidSuit',
