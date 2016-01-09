@@ -26,8 +26,8 @@ This is the general documentation of the blackjack library.
 |-------|----------------|-------------|
 |       |                | Create the dealer. |
 | get_number_of_packs | The number of pack of cards to use in the deck. |    |
-| get_number_of_players | The number of players in the game. |    |
 | get_player_chips | The number of chips each player will start out with. |    |
+| get_number_of_players | The number of players in the game. |    |
 | get_player_names | The names of each of the players. |    |
 |       |                | Create each of the players. |
 

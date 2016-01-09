@@ -18,6 +18,8 @@ from .states import State
 from .states import InvalidStateName
 from .states import InvalidStatePlayer
 from .games import Game
+from .games import InvalidGameMethodOrder
+from .games import InvalidPackNumber
 
 __author__ = 'Christopher Randall Wells'
 __copyright__ = 'Copyright 2015 Christopher Randall Wells'
@@ -48,4 +50,6 @@ __all__ = (
     'InvalidActionMove',
     'InvalidStateName',
     'InvalidStatePlayer',
+    'InvalidGameMethodOrder',
+    'InvalidPackNumber',
 )
