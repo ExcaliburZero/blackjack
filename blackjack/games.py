@@ -26,6 +26,9 @@ class Game(object):
         # The dealer in the game
         self.dealer = None
 
+        # The number of chips each player starts with
+        self.starting_chips = None
+
     def setup_new_game(self):
         """
         The method used to setup a new game.
@@ -58,6 +61,27 @@ class Game(object):
         # Set the game state so the number of players is requested
         self.state = State("get_player_chips", None)
 
+    def set_starting_chips(self, chips):
+        """
+        The method used to set the number of chips that each player starts with.
+
+        :param int chips: The number of chips each player starts with.
+        """
+
+        # Make sure that the game is requesting the number of starting chips
+        if self.state.name != "get_player_chips":
+            raise InvalidGameMethodOrder(self.state.name)
+
+        # Make sure that the given number of starting chips is valid
+        if chips < 1 or not isinstance(chips, int):
+            raise InvalidGameStartingChips(chips)
+
+        # Set the number of starting chips
+        self.starting_chips = chips
+
+        # Set the game state so that the number of players is requested
+        self.state = State("get_number_of_players", None)
+
 
 class InvalidGameMethodOrder(Exception):
     """An exception which is raised whenever an incorrect method is run from the game, based on its current state."""
@@ -66,4 +90,9 @@ class InvalidGameMethodOrder(Exception):
 
 class InvalidPackNumber(Exception):
     """An exception which is raised whenever the number of packs the game is set to use is invalid."""
+    pass
+
+
+class InvalidGameStartingChips(Exception):
+    """An exception which is raised whenever the number of starting chips the game is set to use is invalid."""
     pass

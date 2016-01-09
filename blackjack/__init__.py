@@ -20,6 +20,7 @@ from .states import InvalidStatePlayer
 from .games import Game
 from .games import InvalidGameMethodOrder
 from .games import InvalidPackNumber
+from .games import InvalidGameStartingChips
 
 __author__ = 'Christopher Randall Wells'
 __copyright__ = 'Copyright 2015 Christopher Randall Wells'
@@ -52,4 +53,5 @@ __all__ = (
     'InvalidStatePlayer',
     'InvalidGameMethodOrder',
     'InvalidPackNumber',
+    'InvalidGameStartingChips',
 )
