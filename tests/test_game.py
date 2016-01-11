@@ -6,6 +6,7 @@ from blackjack import InvalidGameMethodOrder
 from blackjack import InvalidPackNumber
 from blackjack import InvalidGameStartingChips
 from blackjack import InvalidGamePlayersNumber
+from blackjack import InvalidGamePlayerNames
 
 
 class TestGame(unittest.TestCase):
@@ -176,3 +177,73 @@ class TestGame(unittest.TestCase):
         except InvalidGameMethodOrder:
             success = True
         self.assertTrue(success, msg="The number of players was incorrectly able to be reset.")
+
+    def test_set_player_names(self):
+        """The method used to make sure that the names of the players in the game can be set."""
+
+        # Setup new games and attempt to set their players' names
+        valid_players = [
+            ["Bob", "Sam", "Cal", "Kris"],
+            ["Player 1", "Player 2", "Player 3", "Player 4", "Player 5"],
+            ["Bot"],
+            ["P1", "P2", "P3"],
+        ]
+        for players in valid_players:
+            game = Game()
+            game.setup_new_game()
+            game.set_pack_number(1)
+            game.set_starting_chips(100)
+            game.set_players_number(len(players))
+            game.set_player_names(players)
+            self.assertEqual(game.player_names, players, msg="The game's player names were not correctly set with: " + str(players))
+
+            # Make sure that the new game state is corectly set
+            self.assertEqual(game.state.name, "start_game", msg="The game's state was not correctly set after setting the player names.")
+
+        # Try to set invalid players
+        invalid_players = [
+            None,
+            [None, None],
+            [123, 456, 789],
+            ["Bob", "Sam", 123],
+            ["John", ""],
+        ]
+        for players in invalid_players:
+            game = Game()
+            game.setup_new_game()
+            game.set_pack_number(1)
+            game.set_starting_chips(100)
+            game.set_players_number(len(players or "1"))
+            success = False
+            try:
+                game.set_player_names(players)
+            except InvalidGamePlayerNames:
+                success = True
+            self.assertTrue(success, msg="The following invalid series of player names was able to be set: " + str(players))
+
+        # Test the case where the number of players given is not the same as the number of names given
+        game = Game()
+        game.setup_new_game()
+        game.set_pack_number(1)
+        game.set_starting_chips(100)
+        game.set_players_number(2)
+        success = False
+        try:
+            game.set_player_names(["P1", "P2", "P3"])
+        except InvalidGamePlayerNames:
+            success = True
+        self.assertTrue(success, msg="A number of player names unequal to the number to the number of players in the game was able to be set.")
+
+        # Try to reset the names of the players to throw an error
+        game = Game()
+        game.setup_new_game()
+        game.set_pack_number(1)
+        game.set_starting_chips(100)
+        game.set_players_number(3)
+        game.set_player_names(["P1", "P2", "P3"])
+        success = False
+        try:
+            game.set_player_names(["P01", "P02", "P03"])
+        except InvalidGameMethodOrder:
+            success = True
+        self.assertTrue(success, msg="The names of the players was incorrectly able to be reset.")

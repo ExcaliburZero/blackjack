@@ -22,6 +22,7 @@ class TestState(unittest.TestCase):
             "get_player_names",
             "get_player_bets",
             "get_player_action",
+            "start_game",
         ]
         for name in valid_names:
             state = State(name, Player(100))

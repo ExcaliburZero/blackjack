@@ -25,6 +25,7 @@ class State(object):
             "get_player_names",
             "get_player_bets",
             "get_player_action",
+            "start_game",
         ]
         if name not in valid_names:
             raise InvalidStateName(name)

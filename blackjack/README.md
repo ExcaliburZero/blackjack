@@ -30,6 +30,7 @@ This is the general documentation of the blackjack library.
 | get_number_of_players | The number of players in the game. |    |
 | get_player_names | The names of each of the players. |    |
 |       |                | Create each of the players. |
+| start_game | Run the start_game method to start the first round. |    |
 
 ### Round
 | State | Requested info | Game action |

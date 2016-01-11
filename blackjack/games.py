@@ -32,6 +32,9 @@ class Game(object):
         # The number of players in the game
         self.players_number = None
 
+        # The names of the players in the game
+        self.player_names = None
+
     def setup_new_game(self):
         """
         The method used to setup a new game.
@@ -106,6 +109,31 @@ class Game(object):
         # Set the game state so that the names of the players are requested
         self.state = State("get_player_names", None)
 
+    def set_player_names(self, names):
+        """
+        The method used to set the names of the players in the game.
+
+        :param list names: The names of the players as strings.
+        """
+
+        # Make sure that the game is requesting the names of the players
+        if self.state.name != "get_player_names":
+            raise InvalidGameMethodOrder(self.state.name)
+
+        # Make sure that the list of names is valid
+        if not isinstance(names, list) or len(names) != self.players_number:
+            raise InvalidGamePlayerNames(names)
+
+        for name in names:
+            if not isinstance(name, str) or name == "":
+                raise InvalidGamePlayerNames(names, name)
+
+        # Set the names of the players
+        self.player_names = names
+
+        # Set the game state so that the game is requested to be started
+        self.state = State("start_game", None)
+
 
 class InvalidGameMethodOrder(Exception):
     """An exception which is raised whenever an incorrect method is run from the game, based on its current state."""
@@ -124,4 +152,9 @@ class InvalidGameStartingChips(Exception):
 
 class InvalidGamePlayersNumber(Exception):
     """An exception which is raised whenever the number of players that the game is set to have is invalid."""
+    pass
+
+
+class InvalidGamePlayerNames(Exception):
+    """An exception which is raised whenever the player names that the game is set to use is invalid."""
     pass
