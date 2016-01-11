@@ -5,6 +5,7 @@ from blackjack import Game
 from blackjack import InvalidGameMethodOrder
 from blackjack import InvalidPackNumber
 from blackjack import InvalidGameStartingChips
+from blackjack import InvalidGamePlayersNumber
 
 
 class TestGame(unittest.TestCase):
@@ -122,3 +123,56 @@ class TestGame(unittest.TestCase):
         except InvalidGameMethodOrder:
             success = True
         self.assertTrue(success, msg="The number of starting chips was incorrectly able to be reset.")
+
+    def test_set_players_number(self):
+        """The method used to make sure that the number of players in the game can be set."""
+
+        # Setup new games and attempt to set thier number of players
+        valid_players = [
+            1,
+            2,
+            10,
+            999,
+        ]
+        for players in valid_players:
+            game = Game()
+            game.setup_new_game()
+            game.set_pack_number(1)
+            game.set_starting_chips(100)
+            game.set_players_number(players)
+            self.assertEqual(game.players_number, players, msg="The number of players was not correctly set with " + str(players) + " players.")
+
+            # Make sure that the new game state is correctly set
+            self.assertEqual(game.state.name, "get_player_names", msg="The game state was not correctly set after setting the number of players in the game.")
+
+        # Try to set invalid player numbers
+        invalid_players = [
+            0,
+            -1,
+            -100,
+            1.5,
+        ]
+        for players in invalid_players:
+            game = Game()
+            game.setup_new_game()
+            game.set_pack_number(1)
+            game.set_starting_chips(100)
+            success = False
+            try:
+                game.set_players_number(players)
+            except InvalidGamePlayersNumber:
+                success = True
+            self.assertTrue(success, msg="An invalid number of players " + str(players) + " was able to be set.")
+
+        # Try to reset the number of players to throw an error
+        game = Game()
+        game.setup_new_game()
+        game.set_pack_number(1)
+        game.set_starting_chips(100)
+        game.set_players_number(3)
+        success = False
+        try:
+            game.set_players_number(2)
+        except InvalidGameMethodOrder:
+            success = True
+        self.assertTrue(success, msg="The number of players was incorrectly able to be reset.")
