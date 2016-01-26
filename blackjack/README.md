@@ -35,12 +35,12 @@ This is the general documentation of the blackjack library.
 ### Round
 | State | Requested info | Game action |
 |-------|----------------|-------------|
-|       |                | Check if the dealer has blackjack. If so then check if any players have blackjack, and give those players back their bet amounts, and end the round. |
-|       |                | Check if any players have blackjack. If so then, award them 2.5x their bet, and skip their turn. |
 | get_player_bets | The number of chips each player bets. |    |
 |       |                | Deduct each player's bets from their chips. |
-|       |                | Deal out cards to each player and the dealer. |
+|       |                | Deal two cards to each player that made bets. |
+|       |                | Check if the dealer has blackjack. If so then check if any players have blackjack, and give those players back their bet amounts, and end the round. |
+|       |                | Check if any players have blackjack. If so then, award them 2.5x their bet, and skip their turn. |
 | get_player_action | The player's action. (repeats until Stand or over 21, also repeats for each player) | Performs the player's action. |
 |       |                | Perform all of the dealer's action(s). |
 |       |                | Payout chips (2x bet) to all winning players. |
-|       |                | Check if any players have 0 chips. If so then have them lose the game. |
+|       |                | Check if all players have 0 chips. If so then end the game. |
