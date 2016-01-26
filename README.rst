@@ -8,6 +8,16 @@ blackjack
 
 A simple blackjack game written in Python.
 
+Development
+-----------
+The following is information on the devleopment of the library.
+
+Testing
+^^^^^^^
+To run the test suit for the library run the following command in the main directory of the project::
+
+    make test
+
 License
 -------
 
