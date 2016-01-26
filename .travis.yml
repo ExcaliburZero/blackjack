@@ -6,6 +6,6 @@ python:
 install:
   - pip install coveralls
 script:
-  - nosetests --with-coverage --cover-package=blackjack
+  - make testcoverage
 after_success:
   - coveralls
